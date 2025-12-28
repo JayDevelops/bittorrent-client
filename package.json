@@ -12,6 +12,8 @@
   "license": "ISC",
   "description": "Simple bittorrent client.",
   "dependencies": {
-    "bencode": "^4.0.0"
+    "bencode": "^4.0.0",
+    "dgram-as-promised": "^6.0.0",
+    "whatwg-url": "^15.1.0"
   }
 }
