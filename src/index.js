@@ -8,9 +8,8 @@ const torrent = bencode.decode(data, "utf8");
 console.log("Torrent: ", torrent);
 
 getPeers(torrent, (error, peers) => {
-  if (!err) {
-    console.log("list of peers: ", peers);
-  } else {
+  if (error) {
     console.log("Error: ", error);
   }
+  console.log("list of peers: ", peers);
 });
