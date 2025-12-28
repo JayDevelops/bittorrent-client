@@ -10,5 +10,8 @@
   "keywords": [],
   "author": "Jay Perez",
   "license": "ISC",
-  "description": "Simple bittorrent client."
+  "description": "Simple bittorrent client.",
+  "dependencies": {
+    "bencode": "^4.0.0"
+  }
 }
