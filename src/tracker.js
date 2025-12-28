@@ -6,7 +6,6 @@ async function getPeers(torrent, callback) {
   // create a udp socket
   const socket = dgram.createSocket("udp4");
   const url = torrent.announce;
-  console.log("URL: ", url);
 
   udpSend(socket, buildConnReq(), url);
 
