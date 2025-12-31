@@ -1,6 +1,7 @@
 "use strict";
 import dgram from "node:dgram";
 import { parseURL } from "whatwg-url";
+import { randomBytes } from "node:crypto";
 
 async function getPeers(torrent, callback) {
   // create a udp socket
@@ -42,9 +43,31 @@ function respType(response) {
   if (action === 1) return "announce";
 }
 
-function buildConnReq() {}
+function buildConnReq() {
+  // length of the message will be about 16 bytes long
+  const buf = Buffer.alloc(16);
 
-function parseConnResp(response) {}
+  // connection id
+  buf.writeUInt32BE(0x417, 0);
+  buf.writeUInt32BE(0x27101980, 4);
+
+  // action
+  buf.writeUInt32BE(0, 8);
+
+  // transaction id
+  crypto.randomBytes(4).copy(buf, 12);
+
+  return buf;
+}
+
+function parseConnResp(response) {
+  const responseFormatted = {
+    action: response.readUInt32BE(0),
+    transactionId: response.readUInt32BE(4),
+    connectionId: response.slice(8),
+  };
+  return responseFormatted;
+}
 
 function buildAnnounceReq(connId) {}
 
