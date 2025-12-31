@@ -10,7 +10,7 @@ async function getPeers(torrent, callback) {
   udpSend(socket, buildConnReq(), url);
 
   socket.on("message", (response) => {
-    const responseType = responseType(response);
+    const responseType = respType(response);
 
     if (responseType === "connect") {
       // connect and send the announce request
@@ -36,7 +36,7 @@ async function udpSend(socket, message, rawUrl, callback = () => {}) {
 }
 
 // Helper method to distinguish if the peer is connecting or announcing since both responses are in the same socket
-function responseType(response) {
+function respType(response) {
   const action = response.readInt32BE(0);
   if (action === 0) return "connect";
   if (action === 1) return "announce";
