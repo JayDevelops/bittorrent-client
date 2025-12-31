@@ -55,7 +55,7 @@ function buildConnReq() {
   buf.writeUInt32BE(0, 8);
 
   // transaction id
-  crypto.randomBytes(4).copy(buf, 12);
+  randomBytes(4).copy(buf, 12);
 
   return buf;
 }
